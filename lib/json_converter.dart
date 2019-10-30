@@ -23,13 +23,21 @@ class JsonConverterState extends State<JsonConverter> {
     return data;
 
   }
+  
 
   Future loadData() async {
   var jsonString = await loadJson();
   print(jsonString);
   final jsonResponse = json.decode(jsonString);
   GameData gameData = new GameData.fromJson(jsonResponse);
-  print(gameData.problems);
+  
+  for(int i=0;i<gameData.problems.length;i++){
+    List<String> temp=[];
+  gameData.problems[0].forEach((f){
+   temp.add('"$f"');
+  });
+    print('[ "1","1","${i+1}",$temp,${gameData.isMinus},${gameData.showAnswer}] ');
+  }
 }
 
   @override
